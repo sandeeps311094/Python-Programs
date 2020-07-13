@@ -1,162 +1,87 @@
-#--  A demonstration of a double-ended queue datastructure using Python
+#---- This program demonstrates a stack of integers ----#
 
 
-import os
-import time
+
+
+#========================
 
 class Stack:
+    points = 12
 
-    def __init__(self):
+    def __init__ (self):
         self.stack = []
-        self.size = 5
-        self.i_count = 0
-        self.d_count = 0
+        self.limit = 7
+        self.expansion_units = 3
 
-    def add_front(self):
-        element = input("Enter the element: ")
-
-        if (len(self.stack) >= self.size):
-            time.sleep(0.8)
-            print ("Stack is full !")
+    def add_front (self):
+        length = Stack.size (self)
+        if (length > self.limit):
+            print ("\n\nStack full... !")
         else:
+            element = int (input ("\nEnter the integer: "))
             self.stack.insert (0, element)
-            self.i_count += 1
 
-    def add_rear(self):
-        element = input("Enter the element: ")
-
-        if (len(self.stack) >= self.size):
-            time.sleep(0.8)
-            print ("Stack is full !")
+    def add_rear (self):
+        if (length > self.limit):
+            print ("\n\nStack full... !")
         else:
-            self.stack.append(element)
-            self.i_count += 1
+            element = int (input ("\nEnter the integer: "))
+            self.stack.append (element)
 
-    def remove_front(self):
-        if (len(self.stack) == 0):
-            print ("Stack is empty !")
+    def remove_front (self):
+        try:
+            self.stack.remove (self.stack [0])
+        except:
+            print ("\n\nStack is empty !!")
+
+    def remove_rear (self):
+        try:
+            self.stack.pop ()
+        except:
+            print ("\n\nStack is empty !!")
+
+    def display (self):
+        print ("\nStack --> {}\n".format (self.stack))
+
+    def len (self):
+        length = Stack.size (self)
+        print ("\n\nLENGTH ---> {}\n\n\n".format (length))
+
+    def size (self):
+        size = len (self.stack)
+        return (size)
+
+    def expand (self):
+        self.limit = 10
+        print ("\nStack expanded, Size --> {}".format (self.limit))
+
+    def compress (self):
+        if (self.limit == 10):
+            self.limit = 7
+        elif (self.limit == 7):
+            self.limit = 5
         else:
-            self.stack.remove (self.stack[0])
-            self.d_count += 1
+            print ("\n\nStack corrupt !!!\n")
+        print ("\nStack compressed, Size --> {}".format (self.limit))
 
-    def remove_rear(self):
-        if (len(self.stack) == 0):
-            print ("Stack is empty !")
-        else:
-            self.stack.pop()
-            self.d_count += 1
+#=====================
 
-    def display(self):
-        time.sleep(0.8)
-        print ("Current Stack --> {}".format (self.stack))
+class Queue:
+    points = 12
 
-    def expand(self):
-        if (self.size > 9):
-            print ("Stack size max limit reached !")
-        elif (self.size <= 9):
-            self.size += 2
+    def __init__ (frame):
+        frame.que = []
+        limit = 7
 
-    def compress(self):
-        if (self.size < 5):
-            print ("Stack size min limit reached !")
-        elif (self.size <= 5):
-            self.size -= 2
+    def insert (frame):
+        ele = str (input ("\n\nInsert char: "))
+        frame.que.append (ele)
 
-    def check_valid_stack(self):
-        time.sleep (0.8)
-        if ((self.stack  == []) and (self.i_count == self.d_count)):
-            print ("VALID")
+    def filter (frame):
+        for i in frame.que:
+            if (ord (i) == 64):
+                print ("\n\n++++")
+            else:
+                continue
 
-        elif ((self.stack  != []) and (self.i_count == self.d_count)):
-            print ("INVALID... !")
-
-        elif ((self.stack  == []) and (self.i_count != self.d_count)):
-            print ("INVALID... !")
-
-        elif ((self.stack  != []) and (self.i_count != self.d_count)):
-            print ("VALID")
-
-
-#---------------------
-
-class Queue(object):
-
-    def __init__(self):
-        self.queue = []
-        self.queue_size = 7
-        self.i_count = 0
-        self.d_count = 0
-
-    def insert(self):
-        element = input ("Enter element: ")
-
-        if (len(self.queue) >= self.queue_size):
-            time.sleep(0.8)
-            print ("Queue is full !")
-        else:
-            self.queue.insert (0, element)
-            self.i_count += 1
-
-
-    def remove(self):
-
-        if (len(self.queue) == 0):
-            print ("Stack is empty !")
-        else:
-            self.queue.pop()
-            self.d_count += 1
-
-
-    def display(self):
-        time.sleep(0.8)
-        print ("Current Queue --> {}".format(self.queue))
-
-
-    def check_valid_queue(self):
-        time.sleep(0.8)
-        if ((self.stack == []) and (self.i_count == self.d_count)):
-            print ("VALID")
-
-        elif ((self.stack != []) and (self.i_count == self.d_count)):
-            print ("INVALID... !")
-
-        elif ((self.stack == []) and (self.i_count != self.d_count)):
-            print ("INVALID... !")
-
-        elif ((self.stack != []) and (self.i_count != self.d_count)):
-            print ("VALID")
-
-
-#---------------------
-
-class stack(object):
-
-    def __init__(self):
-        self.stack = []
-        self.size = 7
-        self.i_count = 0
-        self.d_count = 0
-
-    def push(self):
-        element = input("Enter element: ")
-
-        if (len(self.stack) >= self.size):
-            time.sleep(0.8)
-            print ("Stack is full !")
-        else:
-            self.stack.insert(0, element)
-            self.i_count += 1
-
-
-    def pop(self):
-        if (len(self.stack) <= self.size):
-            time.sleep (0.8)
-        else:
-            self.stack.pop()
-            self.d_count += 1
-
-
-#---------------------
-
-if __name__ == '__main__':
-    stk = stack.Stack()
+#======================
